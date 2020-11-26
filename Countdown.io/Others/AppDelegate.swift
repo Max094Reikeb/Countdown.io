@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  Countdown.io
 //
-//  Created by Maxence Bekier on 26/11/2020.
+//  Created by Max094_Reikeb on 26/11/2020.
 //
 
 import UIKit

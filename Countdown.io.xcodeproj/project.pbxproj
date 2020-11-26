@@ -99,13 +99,10 @@
 		F949D5D9256F9E5C00EB370C /* Countdown.io */ = {
 			isa = PBXGroup;
 			children = (
-				F949D5DA256F9E5C00EB370C /* AppDelegate.swift */,
-				F949D5DC256F9E5C00EB370C /* SceneDelegate.swift */,
-				F949D5DE256F9E5C00EB370C /* ViewController.swift */,
-				F949D5E0256F9E5C00EB370C /* Main.storyboard */,
-				F949D5E3256F9E6300EB370C /* Assets.xcassets */,
-				F949D5E5256F9E6300EB370C /* LaunchScreen.storyboard */,
-				F949D5E8256F9E6300EB370C /* Info.plist */,
+				F979914E256FAD0500BF58CF /* Assets */,
+				F979914D256FACF400BF58CF /* Others */,
+				F979914C256FACE600BF58CF /* Controllers */,
+				F979914B256FACD300BF58CF /* Storyboards */,
 			);
 			path = Countdown.io;
 			sourceTree = "<group>";
@@ -126,6 +123,41 @@
 				F949D5FE256F9E6300EB370C /* Info.plist */,
 			);
 			path = Countdown.ioUITests;
+			sourceTree = "<group>";
+		};
+		F979914B256FACD300BF58CF /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				F949D5E0256F9E5C00EB370C /* Main.storyboard */,
+				F949D5E5256F9E6300EB370C /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		F979914C256FACE600BF58CF /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F949D5DE256F9E5C00EB370C /* ViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		F979914D256FACF400BF58CF /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				F949D5DA256F9E5C00EB370C /* AppDelegate.swift */,
+				F949D5DC256F9E5C00EB370C /* SceneDelegate.swift */,
+			);
+			path = Others;
+			sourceTree = "<group>";
+		};
+		F979914E256FAD0500BF58CF /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				F949D5E8256F9E6300EB370C /* Info.plist */,
+				F949D5E3256F9E6300EB370C /* Assets.xcassets */,
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
