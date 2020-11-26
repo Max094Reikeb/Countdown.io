@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AudioToolbox
 
 class ViewController: UIViewController {
 
@@ -29,13 +30,13 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        //Setup random datas
+        // Setup random datas
         setupRandom()
         
-        //First refresh labels
+        // First refresh labels
         refreshLabels()
         
-        //Timer
+        // Timer
         scheduledTimerWithTimeInterval()
     }
     
@@ -52,14 +53,14 @@ class ViewController: UIViewController {
     func setupRandom() {
         let isRandomSettedUp = Utilities.getBool("random")
         if (!isRandomSettedUp) {
-            //Getting random numbers
+            // Getting random numbers
             let randomYear = Int.random(in: 0...50)
             let randomDays = Int.random(in: 0...364)
             let randomHours = Int.random(in: 0...23)
             let randomMins = Int.random(in: 0...59)
             let randomSec = Int.random(in: 2...59)
             
-            //Saving random numbers
+            // Saving random numbers
             Utilities.saveInt("years", randomYear)
             Utilities.saveInt("days", randomDays)
             Utilities.saveInt("hours", randomHours)
@@ -68,7 +69,7 @@ class ViewController: UIViewController {
             
             Utilities.saveBool("random", true)
             
-            //Refresh labels
+            // Refresh labels
             refreshLabels()
         }
     }
@@ -82,6 +83,9 @@ class ViewController: UIViewController {
             if (Utilities.getInt("years") == 0) {
                 self.yearLabel.textColor = UIColor.red
                 self.YRS.textColor = UIColor.red
+            } else {
+                self.yearLabel.textColor = UIColor.white
+                self.YRS.textColor = UIColor.white
             }
         }
         
@@ -92,6 +96,9 @@ class ViewController: UIViewController {
             if ((Utilities.getInt("years") == 0) && (Utilities.getInt("days") == 0)) {
                 self.dayLabel.textColor = UIColor.red
                 self.DAY.textColor = UIColor.red
+            } else {
+                self.dayLabel.textColor = UIColor.white
+                self.DAY.textColor = UIColor.white
             }
         }
         
@@ -102,6 +109,9 @@ class ViewController: UIViewController {
             if ((Utilities.getInt("years") == 0) && (Utilities.getInt("days") == 0) && (Utilities.getInt("hours") == 0)) {
                 self.hourLabel.textColor = UIColor.red
                 self.HRS.textColor = UIColor.red
+            } else {
+                self.hourLabel.textColor = UIColor.white
+                self.HRS.textColor = UIColor.white
             }
         }
         
@@ -112,6 +122,9 @@ class ViewController: UIViewController {
             if ((Utilities.getInt("years") == 0) && (Utilities.getInt("days") == 0) && (Utilities.getInt("hours") == 0) && (Utilities.getInt("minutes") == 0)) {
                 self.minuteLabel.textColor = UIColor.red
                 self.MIN.textColor = UIColor.red
+            } else {
+                self.minuteLabel.textColor = UIColor.white
+                self.MIN.textColor = UIColor.white
             }
         }
         
@@ -123,6 +136,9 @@ class ViewController: UIViewController {
                     (Utilities.getInt("seconds") == 0)) {
                 self.secondLabel.textColor = UIColor.red
                 self.SEC.textColor = UIColor.red
+            } else {
+                self.secondLabel.textColor = UIColor.white
+                self.SEC.textColor = UIColor.white
             }
         }
     }
@@ -134,31 +150,36 @@ class ViewController: UIViewController {
     }
     
     @objc func updateCounting() {
-        if (Utilities.getInt("years") >= 0) {
-            if (Utilities.getInt("days") >= 0) {
-                if (Utilities.getInt("hours") >= 0) {
-                    if (Utilities.getInt("minutes") >= 0) {
-                        if (Utilities.getInt("seconds") > 0) {
-                            (Utilities.saveInt("seconds", (Utilities.getInt("seconds") - 1)))
+        if ((Utilities.getInt("years") == 0) && (Utilities.getInt("days") == 0) && (Utilities.getInt("hours") == 0) && (Utilities.getInt("minutes") == 0) &&
+                (Utilities.getInt("seconds") == 0)) {
+            AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+        } else {
+            if (Utilities.getInt("years") >= 0) {
+                if (Utilities.getInt("days") >= 0) {
+                    if (Utilities.getInt("hours") >= 0) {
+                        if (Utilities.getInt("minutes") >= 0) {
+                            if (Utilities.getInt("seconds") > 0) {
+                                (Utilities.saveInt("seconds", (Utilities.getInt("seconds") - 1)))
+                            } else {
+                                (Utilities.saveInt("minutes", (Utilities.getInt("minutes") - 1)))
+                                (Utilities.saveInt("seconds", 59))
+                            }
                         } else {
-                            (Utilities.saveInt("minutes", (Utilities.getInt("minutes") - 1)))
-                            (Utilities.saveInt("seconds", 59))
+                            (Utilities.saveInt("hours", (Utilities.getInt("hours") - 1)))
+                            (Utilities.saveInt("minutes", 59))
                         }
                     } else {
-                        (Utilities.saveInt("hours", (Utilities.getInt("hours") - 1)))
-                        (Utilities.saveInt("minutes", 59))
+                        (Utilities.saveInt("days", (Utilities.getInt("days") - 1)))
+                        (Utilities.saveInt("hours", 23))
                     }
                 } else {
-                    (Utilities.saveInt("days", (Utilities.getInt("days") - 1)))
-                    (Utilities.saveInt("hours", 23))
+                    (Utilities.saveInt("years", (Utilities.getInt("years") - 1)))
+                    (Utilities.saveInt("days", 364))
                 }
-            } else {
-                (Utilities.saveInt("years", (Utilities.getInt("years") - 1)))
-                (Utilities.saveInt("days", 364))
             }
         }
         
-        //Update labels
+        // Update labels
         refreshLabels()
     }
 }
