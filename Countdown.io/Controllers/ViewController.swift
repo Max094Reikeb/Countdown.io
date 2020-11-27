@@ -30,8 +30,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        // Setup random datas
-        setupRandom()
+        // Setup datas
+        setupDatas()
         
         // First refresh labels
         refreshLabels()
@@ -49,25 +49,18 @@ class ViewController: UIViewController {
         navigationController?.navigationBar.barStyle = .black
     }
     
-    // MARK: Setup random datas
-    func setupRandom() {
-        let isRandomSettedUp = Utilities.getBool("random")
-        if (!isRandomSettedUp) {
-            // Getting random numbers
-            let randomYear = Int.random(in: 0...50)
-            let randomDays = Int.random(in: 0...364)
-            let randomHours = Int.random(in: 0...23)
-            let randomMins = Int.random(in: 0...59)
-            let randomSec = Int.random(in: 2...59)
-            
+    // MARK: Setup datas
+    func setupDatas() {
+        let isSettedUp = Utilities.getBool("settedup")
+        if (!isSettedUp) {
             // Saving random numbers
-            Utilities.saveInt("years", randomYear)
-            Utilities.saveInt("days", randomDays)
-            Utilities.saveInt("hours", randomHours)
-            Utilities.saveInt("minutes", randomMins)
-            Utilities.saveInt("seconds", randomSec)
+            Utilities.saveInt("years", 0)
+            Utilities.saveInt("days", 0)
+            Utilities.saveInt("hours", 0)
+            Utilities.saveInt("minutes", 0)
+            Utilities.saveInt("seconds", 0)
             
-            Utilities.saveBool("random", true)
+            Utilities.saveBool("settedup", true)
             
             // Refresh labels
             refreshLabels()
@@ -143,7 +136,7 @@ class ViewController: UIViewController {
         }
     }
     
-    // MARK: Setup timers
+    // MARK: Setup timer
     func scheduledTimerWithTimeInterval() {
         // Scheduling timer to call the function "updateCounting" with the interval of 1 second
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateCounting), userInfo: nil, repeats: true)

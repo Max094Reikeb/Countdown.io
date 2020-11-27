@@ -75,12 +75,23 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EDV-EA-nOb">
+                                <rect key="frame" x="363" y="44" width="21" height="60"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                <state key="normal" image="calendar" catalog="system">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <segue destination="fGW-BL-Qzm" kind="showDetail" id="EUM-Pv-cvD"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="xRJ-ZZ-ykE" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="26B-9A-lEw"/>
                             <constraint firstItem="9w2-bC-K5Q" firstAttribute="leading" secondItem="8TQ-XU-lO3" secondAttribute="trailing" constant="8" id="3sj-RT-kZS"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="EDV-EA-nOb" secondAttribute="trailing" constant="30" id="4xN-aP-cMG"/>
                             <constraint firstItem="8TQ-XU-lO3" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="5PH-gn-XsF"/>
                             <constraint firstItem="UI7-bk-CyO" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="6D2-2P-3kE"/>
                             <constraint firstItem="MbA-6L-Pmy" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="7VP-mi-MIV"/>
@@ -96,6 +107,7 @@
                             <constraint firstItem="BYT-l1-Pan" firstAttribute="top" secondItem="JbP-0h-GJu" secondAttribute="bottom" constant="120" id="elS-Rw-Lr8"/>
                             <constraint firstItem="Hv9-i1-bpZ" firstAttribute="top" secondItem="8TQ-XU-lO3" secondAttribute="bottom" constant="80" id="gfH-Yc-WlQ"/>
                             <constraint firstItem="xRJ-ZZ-ykE" firstAttribute="top" secondItem="UI7-bk-CyO" secondAttribute="bottom" constant="80" id="ovB-sJ-8vk"/>
+                            <constraint firstItem="EDV-EA-nOb" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="pWu-aD-UK1"/>
                             <constraint firstItem="UI7-bk-CyO" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="qTI-dx-EwF"/>
                             <constraint firstItem="Sla-tK-aYP" firstAttribute="leading" secondItem="Hv9-i1-bpZ" secondAttribute="trailing" constant="8" id="qvB-Wd-9vu"/>
                             <constraint firstItem="Sla-tK-aYP" firstAttribute="top" secondItem="9w2-bC-K5Q" secondAttribute="bottom" constant="120" id="xhu-gK-CkF"/>
@@ -118,5 +130,59 @@
             </objects>
             <point key="canvasLocation" x="35" y="77"/>
         </scene>
+        <!--Settings View Controller-->
+        <scene sceneID="LXU-BD-ueF">
+            <objects>
+                <viewController id="fGW-BL-Qzm" customClass="SettingsViewController" customModule="Countdown_io" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="c62-Sh-kzc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="mi8-zG-Kgu">
+                                <rect key="frame" x="47" y="313" width="320" height="216"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </datePicker>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select the countdown date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YSC-kE-fnG">
+                                <rect key="frame" x="69" y="194" width="276.5" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1QU-no-vWX">
+                                <rect key="frame" x="69" y="619" width="276" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="2lR-nn-9yS"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <state key="normal" title="Confirm"/>
+                                <connections>
+                                    <action selector="confirmAction:" destination="fGW-BL-Qzm" eventType="touchUpInside" id="eYb-GA-Eee"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="YVU-z1-zGo"/>
+                        <constraints>
+                            <constraint firstItem="mi8-zG-Kgu" firstAttribute="centerX" secondItem="c62-Sh-kzc" secondAttribute="centerX" id="1BE-kA-IPn"/>
+                            <constraint firstItem="mi8-zG-Kgu" firstAttribute="centerY" secondItem="c62-Sh-kzc" secondAttribute="centerY" id="5Fv-zX-rvz"/>
+                            <constraint firstItem="1QU-no-vWX" firstAttribute="centerX" secondItem="c62-Sh-kzc" secondAttribute="centerX" id="B6P-t2-L0R"/>
+                            <constraint firstItem="YSC-kE-fnG" firstAttribute="centerX" secondItem="c62-Sh-kzc" secondAttribute="centerX" id="Bmm-ek-A23"/>
+                            <constraint firstItem="mi8-zG-Kgu" firstAttribute="top" secondItem="YSC-kE-fnG" secondAttribute="bottom" constant="90" id="EBW-xL-3rv"/>
+                            <constraint firstItem="1QU-no-vWX" firstAttribute="leading" secondItem="YVU-z1-zGo" secondAttribute="leading" constant="69" id="M0C-z8-CUR"/>
+                            <constraint firstItem="1QU-no-vWX" firstAttribute="top" secondItem="mi8-zG-Kgu" secondAttribute="bottom" constant="90" id="pCV-TY-sXR"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="confirmButton" destination="1QU-no-vWX" id="PZ9-mL-SPR"/>
+                        <outlet property="countdownDate" destination="mi8-zG-Kgu" id="j6v-Aq-TrO"/>
+                        <outlet property="dateSelector" destination="mi8-zG-Kgu" id="zYI-dX-4TP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ujh-mt-KWf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="944.92753623188412" y="75.669642857142847"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="calendar" catalog="system" width="128" height="106"/>
+    </resources>
 </document>

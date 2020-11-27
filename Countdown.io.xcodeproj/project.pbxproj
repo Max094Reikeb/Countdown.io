@@ -16,6 +16,7 @@
 		F949D5F2256F9E6300EB370C /* Countdown_ioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F949D5F1256F9E6300EB370C /* Countdown_ioTests.swift */; };
 		F949D5FD256F9E6300EB370C /* Countdown_ioUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F949D5FC256F9E6300EB370C /* Countdown_ioUITests.swift */; };
 		F9A5A688256FB22700542BDD /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A5A687256FB22700542BDD /* Utilities.swift */; };
+		F9B57C6A25706F2400E231BA /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B57C6925706F2400E231BA /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		F949D5FC256F9E6300EB370C /* Countdown_ioUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Countdown_ioUITests.swift; sourceTree = "<group>"; };
 		F949D5FE256F9E6300EB370C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F9A5A687256FB22700542BDD /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		F9B57C6925706F2400E231BA /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				F949D5DE256F9E5C00EB370C /* ViewController.swift */,
+				F9B57C6925706F2400E231BA /* SettingsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 				F949D5DF256F9E5C00EB370C /* ViewController.swift in Sources */,
 				F949D5DB256F9E5C00EB370C /* AppDelegate.swift in Sources */,
 				F9A5A688256FB22700542BDD /* Utilities.swift in Sources */,
+				F9B57C6A25706F2400E231BA /* SettingsViewController.swift in Sources */,
 				F949D5DD256F9E5C00EB370C /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
