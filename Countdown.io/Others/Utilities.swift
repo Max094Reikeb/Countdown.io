@@ -65,5 +65,49 @@ class Utilities {
         let returnBool = defaults.bool(forKey: boolKey)
         return returnBool
     }
+    
+    //function to save a date with a key
+    static func saveDate(_ dateKey:String, _ date:Date) {
+        // uncompose the date
+        let calendar = Calendar.current
 
+        let components = calendar.dateComponents([Calendar.Component.second, Calendar.Component.minute, Calendar.Component.hour, Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: date)
+
+        // save the datas
+        Utilities.saveInt("dateSavedAsYear", components.year!)
+        Utilities.saveInt("dateSavedAsMonth", components.month!)
+        Utilities.saveInt("dateSavedAsDays", components.day!)
+        Utilities.saveInt("dateSavedAsHours", components.hour!)
+        Utilities.saveInt("dateSavedAsMinutes", components.minute!)
+        Utilities.saveInt("dateSavedAsSeconds", components.second!)
+    }
+    
+    //function to get a date with a key
+    static func getDate(_ dateKey:String) -> Date {
+        let calendar = Calendar.current
+
+        var components = DateComponents()
+
+        components.year = Utilities.getInt("dateSavedAsYear")
+        components.month = Utilities.getInt("dateSavedAsMonth")
+        components.day = Utilities.getInt("dateSavedAsDays")
+        components.hour = Utilities.getInt("dateSavedAsHours")
+        components.minute = Utilities.getInt("dateSavedAsMinutes")
+        components.second = Utilities.getInt("dateSavedAsSeconds")
+
+        let newDate = calendar.date(from: components)
+        return newDate!
+    }
+
+    //function to see if a year is leap or not
+    static func isLeapYear(_ year: Int) -> Bool {
+        if (year % 4 == 0) {
+            if (year % 100 != 0) {
+                if (year % 400 == 0) {
+                    return true
+                }
+            }
+        }
+        return false
+    }
 }

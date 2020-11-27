@@ -82,7 +82,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="fGW-BL-Qzm" kind="showDetail" id="EUM-Pv-cvD"/>
+                                    <segue destination="fGW-BL-Qzm" kind="showDetail" id="dIn-Kb-Jdd"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -173,7 +173,6 @@
                     </view>
                     <connections>
                         <outlet property="confirmButton" destination="1QU-no-vWX" id="PZ9-mL-SPR"/>
-                        <outlet property="countdownDate" destination="mi8-zG-Kgu" id="j6v-Aq-TrO"/>
                         <outlet property="dateSelector" destination="mi8-zG-Kgu" id="zYI-dX-4TP"/>
                     </connections>
                 </viewController>

@@ -64,6 +64,59 @@ class ViewController: UIViewController {
             
             // Refresh labels
             refreshLabels()
+            
+        } else {
+            // Get back the date
+            let currentDate = Date()
+            let selectorDate = Utilities.getDate("dateSelected")
+            
+            let calendar = Calendar.current
+                
+            let currentComponents = calendar.dateComponents([Calendar.Component.second, Calendar.Component.minute, Calendar.Component.hour, Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: currentDate)
+                
+            let objectiveComponents = calendar.dateComponents([Calendar.Component.second, Calendar.Component.minute, Calendar.Component.hour, Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: selectorDate)
+                
+            // Day difference
+            // Replace the hour (time) of both dates with 00:00
+            let date1 = calendar.startOfDay(for: currentDate)
+            let date2 = calendar.startOfDay(for: selectorDate)
+
+            let components = calendar.dateComponents([.day], from: date1, to: date2)
+            
+            Utilities.saveInt("days", components.day!)
+            
+            // Year difference
+            if (components.day! > 366 && Utilities.isLeapYear(objectiveComponents.year!)) {
+                Utilities.saveInt("years", Int(floor(Double(components.day! / 366))))
+            } else if (components.day! > 365) {
+                Utilities.saveInt("years", Int(floor(Double(components.day! / 365))))
+            } else {
+                Utilities.saveInt("years", 0)
+            }
+                
+            // Hour difference
+            if (objectiveComponents.hour! < currentComponents.hour!) {
+                Utilities.saveInt("hours", (24 - currentComponents.hour!))
+            } else {
+                Utilities.saveInt("hours", (objectiveComponents.hour! - currentComponents.hour!))
+            }
+                
+            // Minute difference
+            if (objectiveComponents.minute! < currentComponents.minute!) {
+                Utilities.saveInt("minutes", (60 - currentComponents.minute!))
+            } else {
+                Utilities.saveInt("minutes", (objectiveComponents.minute! - currentComponents.minute!))
+            }
+                
+            // Second difference
+            if (objectiveComponents.second! < currentComponents.second!) {
+                Utilities.saveInt("seconds", (currentComponents.second! - objectiveComponents.second!))
+            } else {
+                Utilities.saveInt("seconds", (objectiveComponents.second! - currentComponents.second!))
+            }
+            
+            // Refresh labels
+            refreshLabels()
         }
     }
     
@@ -71,6 +124,10 @@ class ViewController: UIViewController {
     func refreshLabels() {
         if (Utilities.getInt("years") >= 10) {
             self.yearLabel.text! = "\(Utilities.getInt("years"))"
+            if (self.yearLabel.textColor != UIColor.white) {
+                self.yearLabel.textColor = UIColor.white
+                self.YRS.textColor = UIColor.white
+            }
         } else {
             self.yearLabel.text! = "0\(Utilities.getInt("years"))"
             if (Utilities.getInt("years") == 0) {
@@ -84,6 +141,10 @@ class ViewController: UIViewController {
         
         if (Utilities.getInt("days") >= 10) {
             self.dayLabel.text! = "\(Utilities.getInt("days"))"
+            if (self.dayLabel.textColor != UIColor.white) {
+                self.dayLabel.textColor = UIColor.white
+                self.DAY.textColor = UIColor.white
+            }
         } else {
             self.dayLabel.text! = "0\(Utilities.getInt("days"))"
             if ((Utilities.getInt("years") == 0) && (Utilities.getInt("days") == 0)) {
@@ -97,6 +158,10 @@ class ViewController: UIViewController {
         
         if (Utilities.getInt("hours") >= 10) {
             self.hourLabel.text! = "\(Utilities.getInt("hours"))"
+            if (self.hourLabel.textColor != UIColor.white) {
+                self.hourLabel.textColor = UIColor.white
+                self.HRS.textColor = UIColor.white
+            }
         } else {
             self.hourLabel.text! = "0\(Utilities.getInt("hours"))"
             if ((Utilities.getInt("years") == 0) && (Utilities.getInt("days") == 0) && (Utilities.getInt("hours") == 0)) {
@@ -110,6 +175,10 @@ class ViewController: UIViewController {
         
         if (Utilities.getInt("minutes") >= 10) {
             self.minuteLabel.text! = "\(Utilities.getInt("minutes"))"
+            if (self.minuteLabel.textColor != UIColor.white) {
+                self.minuteLabel.textColor = UIColor.white
+                self.MIN.textColor = UIColor.white
+            }
         } else {
             self.minuteLabel.text! = "0\(Utilities.getInt("minutes"))"
             if ((Utilities.getInt("years") == 0) && (Utilities.getInt("days") == 0) && (Utilities.getInt("hours") == 0) && (Utilities.getInt("minutes") == 0)) {
@@ -123,6 +192,10 @@ class ViewController: UIViewController {
         
         if (Utilities.getInt("seconds") >= 10) {
             self.secondLabel.text! = "\(Utilities.getInt("seconds"))"
+            if (secondLabel.textColor != UIColor.white) {
+                self.secondLabel.textColor = UIColor.white
+                self.SEC.textColor = UIColor.white
+            }
         } else {
             self.secondLabel.text! = "0\(Utilities.getInt("seconds"))"
             if ((Utilities.getInt("years") == 0) && (Utilities.getInt("days") == 0) && (Utilities.getInt("hours") == 0) && (Utilities.getInt("minutes") == 0) &&
@@ -174,5 +247,11 @@ class ViewController: UIViewController {
         
         // Update labels
         refreshLabels()
+    }
+    
+    func alertUser(_ title: String, _ message:String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+        present(alert, animated: true)
     }
 }
