@@ -78,6 +78,9 @@ class SettingsViewController: UIViewController {
             } else {
                 Utilities.saveInt("seconds", (objectiveComponents.second! - currentComponents.second!))
             }
+            
+            // Dismiss
+            self.dismiss(animated: true, completion: nil)
         }
     }
     
