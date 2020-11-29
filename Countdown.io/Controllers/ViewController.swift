@@ -33,9 +33,6 @@ class ViewController: UIViewController {
         // Setup datas
         setupDatas()
         
-        // First refresh labels
-        refreshLabels()
-        
         // Timer
         scheduledTimerWithTimeInterval()
     }
@@ -65,58 +62,6 @@ class ViewController: UIViewController {
             // Refresh labels
             refreshLabels()
             
-        } else {
-            // Get back the date
-            let currentDate = Date()
-            let selectorDate = Utilities.getDate("dateSelected")
-            
-            let calendar = Calendar.current
-                
-            let currentComponents = calendar.dateComponents([Calendar.Component.second, Calendar.Component.minute, Calendar.Component.hour, Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: currentDate)
-                
-            let objectiveComponents = calendar.dateComponents([Calendar.Component.second, Calendar.Component.minute, Calendar.Component.hour, Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: selectorDate)
-                
-            // Day difference
-            // Replace the hour (time) of both dates with 00:00
-            let date1 = calendar.startOfDay(for: currentDate)
-            let date2 = calendar.startOfDay(for: selectorDate)
-
-            let components = calendar.dateComponents([.day], from: date1, to: date2)
-            
-            Utilities.saveInt("days", components.day!)
-            
-            // Year difference
-            if (components.day! > 366 && Utilities.isLeapYear(objectiveComponents.year!)) {
-                Utilities.saveInt("years", Int(floor(Double(components.day! / 366))))
-            } else if (components.day! > 365) {
-                Utilities.saveInt("years", Int(floor(Double(components.day! / 365))))
-            } else {
-                Utilities.saveInt("years", 0)
-            }
-                
-            // Hour difference
-            if (objectiveComponents.hour! < currentComponents.hour!) {
-                Utilities.saveInt("hours", (24 - currentComponents.hour!))
-            } else {
-                Utilities.saveInt("hours", (objectiveComponents.hour! - currentComponents.hour!))
-            }
-                
-            // Minute difference
-            if (objectiveComponents.minute! < currentComponents.minute!) {
-                Utilities.saveInt("minutes", (60 - currentComponents.minute!))
-            } else {
-                Utilities.saveInt("minutes", (objectiveComponents.minute! - currentComponents.minute!))
-            }
-                
-            // Second difference
-            if (objectiveComponents.second! < currentComponents.second!) {
-                Utilities.saveInt("seconds", (currentComponents.second! - objectiveComponents.second!))
-            } else {
-                Utilities.saveInt("seconds", (objectiveComponents.second! - currentComponents.second!))
-            }
-            
-            // Refresh labels
-            refreshLabels()
         }
     }
     
@@ -220,33 +165,64 @@ class ViewController: UIViewController {
                 (Utilities.getInt("seconds") == 0)) {
             AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
         } else {
-            if (Utilities.getInt("years") >= 0) {
-                if (Utilities.getInt("days") >= 0) {
-                    if (Utilities.getInt("hours") >= 0) {
-                        if (Utilities.getInt("minutes") >= 0) {
-                            if (Utilities.getInt("seconds") > 0) {
-                                (Utilities.saveInt("seconds", (Utilities.getInt("seconds") - 1)))
-                            } else {
-                                (Utilities.saveInt("minutes", (Utilities.getInt("minutes") - 1)))
-                                (Utilities.saveInt("seconds", 59))
-                            }
-                        } else {
-                            (Utilities.saveInt("hours", (Utilities.getInt("hours") - 1)))
-                            (Utilities.saveInt("minutes", 59))
-                        }
-                    } else {
-                        (Utilities.saveInt("days", (Utilities.getInt("days") - 1)))
-                        (Utilities.saveInt("hours", 23))
-                    }
-                } else {
-                    (Utilities.saveInt("years", (Utilities.getInt("years") - 1)))
-                    (Utilities.saveInt("days", 364))
-                }
+            // Get back the date
+            let currentDate = Date()
+            let selectorDate = Utilities.getDate("dateSelected")
+            
+            let calendar = Calendar.current
+                
+            let currentComponents = calendar.dateComponents([Calendar.Component.second, Calendar.Component.minute, Calendar.Component.hour, Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: currentDate)
+                
+            let objectiveComponents = calendar.dateComponents([Calendar.Component.second, Calendar.Component.minute, Calendar.Component.hour, Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: selectorDate)
+                
+            // Day difference
+            // Replace the hour (time) of both dates with 00:00
+            let date1 = calendar.startOfDay(for: currentDate)
+            let date2 = calendar.startOfDay(for: selectorDate)
+
+            let components = calendar.dateComponents([.day], from: date1, to: date2)
+            
+            Utilities.saveInt("days", components.day!)
+            
+            // Year difference
+            if (components.day! > 366 && Utilities.isLeapYear(objectiveComponents.year!)) {
+                Utilities.saveInt("years", Int(floor(Double(components.day! / 366))))
+            } else if (components.day! > 365) {
+                Utilities.saveInt("years", Int(floor(Double(components.day! / 365))))
+            } else {
+                Utilities.saveInt("years", 0)
             }
+                
+            // Hour difference
+            if (objectiveComponents.hour! < currentComponents.hour!) {
+                Utilities.saveInt("hours", (24 - currentComponents.hour!))
+            } else {
+                Utilities.saveInt("hours", (objectiveComponents.hour! - currentComponents.hour!))
+            }
+                
+            // Minute difference
+            if (objectiveComponents.minute! < currentComponents.minute!) {
+                Utilities.saveInt("minutes", (60 - currentComponents.minute!))
+            } else {
+                Utilities.saveInt("minutes", (objectiveComponents.minute! - currentComponents.minute!))
+            }
+            
+            // Sync seconds with minutes
+            if (Utilities.getInt("lastMinute") != Utilities.getInt("minutes")) {
+                Utilities.saveInt("seconds", 60)
+            }
+            Utilities.saveInt("lastMinute", Utilities.getInt("minutes"))
+                
+            // Second difference
+            if (Utilities.getInt("seconds") > 0) {
+                (Utilities.saveInt("seconds", (Utilities.getInt("seconds") - 1)))
+            } else {
+                (Utilities.saveInt("seconds", 59))
+            }
+            
+            // Refresh labels
+            refreshLabels()
         }
-        
-        // Update labels
-        refreshLabels()
     }
     
     func alertUser(_ title: String, _ message:String) {

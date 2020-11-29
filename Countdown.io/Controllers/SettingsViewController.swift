@@ -72,12 +72,8 @@ class SettingsViewController: UIViewController {
                 Utilities.saveInt("minutes", (objectiveComponents.minute! - currentComponents.minute!))
             }
             
-            // Second difference
-            if (objectiveComponents.second! < currentComponents.second!) {
-                Utilities.saveInt("seconds", (currentComponents.second! - objectiveComponents.second!))
-            } else {
-                Utilities.saveInt("seconds", (objectiveComponents.second! - currentComponents.second!))
-            }
+            // Setup seconds
+            Utilities.saveInt("seconds", 59)
             
             // Dismiss
             self.dismiss(animated: true, completion: nil)
