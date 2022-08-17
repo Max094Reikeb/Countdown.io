@@ -20,11 +20,12 @@ class SettingsViewController: UIViewController {
         
         setupElements()
     }
-    
+
     func setupElements() {
         Utilities.styleFilledButton(confirmButton, "red", 18.0)
+        dateSelector.tintColor = UIColor.init(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
     }
-    
+
     @IBAction func confirmAction(_ sender: Any) {
         let currentDate = Date()
         if (self.dateSelector.date <= currentDate) {
