@@ -18,13 +18,12 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        overrideUserInterfaceStyle = .dark
         setupElements()
     }
 
     func setupElements() {
         Utilities.styleFilledButton(confirmButton, "red", 18.0)
-        dateSelector.setValue(false, forKey: "highlightsToday")
-        dateSelector.setValue(UIColor.white, forKey: "textColor")
     }
 
     @IBAction func confirmAction(_ sender: Any) {
