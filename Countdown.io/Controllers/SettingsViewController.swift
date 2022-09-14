@@ -23,7 +23,8 @@ class SettingsViewController: UIViewController {
 
     func setupElements() {
         Utilities.styleFilledButton(confirmButton, "red", 18.0)
-        dateSelector.tintColor = UIColor.init(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
+        dateSelector.setValue(false, forKey: "highlightsToday")
+        dateSelector.setValue(UIColor.white, forKey: "textColor")
     }
 
     @IBAction func confirmAction(_ sender: Any) {
