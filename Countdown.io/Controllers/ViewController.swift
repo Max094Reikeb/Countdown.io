@@ -30,20 +30,12 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        // Setup datas
+        // Setup display & datas
+        overrideUserInterfaceStyle = .dark
         setupDatas()
         
         // Timer
         scheduledTimerWithTimeInterval()
-    }
-    
-    // MARK: Set the navigation bar in white
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        navigationController?.navigationBar.barStyle = .black
     }
     
     // MARK: Setup datas
@@ -207,18 +199,8 @@ class ViewController: UIViewController {
                 Utilities.saveInt("minutes", (objectiveComponents.minute! - currentComponents.minute!))
             }
             
-            // Sync seconds with minutes
-            if (Utilities.getInt("lastMinute") != Utilities.getInt("minutes")) {
-                Utilities.saveInt("seconds", 60)
-            }
-            Utilities.saveInt("lastMinute", Utilities.getInt("minutes"))
-                
-            // Second difference
-            if (Utilities.getInt("seconds") > 0) {
-                (Utilities.saveInt("seconds", (Utilities.getInt("seconds") - 1)))
-            } else {
-                (Utilities.saveInt("seconds", 59))
-            }
+            // Set seconds
+            Utilities.saveInt("seconds", (60 - currentComponents.second!))
             
             // Refresh labels
             refreshLabels()
