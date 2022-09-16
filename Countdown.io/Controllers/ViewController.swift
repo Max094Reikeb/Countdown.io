@@ -188,6 +188,8 @@ class ViewController: UIViewController {
             // Hour difference
             if (objectiveComponents.hour! < currentComponents.hour!) {
                 Utilities.saveInt("hours", (24 - currentComponents.hour!))
+            } else if (objectiveComponents.hour! - currentComponents.hour! == 1) {
+                Utilities.saveInt("hours", 0)
             } else {
                 Utilities.saveInt("hours", (objectiveComponents.hour! - currentComponents.hour!))
             }
@@ -195,12 +197,14 @@ class ViewController: UIViewController {
             // Minute difference
             if (objectiveComponents.minute! < currentComponents.minute!) {
                 Utilities.saveInt("minutes", (60 - currentComponents.minute!))
+            } else if (objectiveComponents.minute! - currentComponents.minute! == 1) {
+                Utilities.saveInt("minutes", 0)
             } else {
                 Utilities.saveInt("minutes", (objectiveComponents.minute! - currentComponents.minute!))
             }
             
             // Set seconds
-            Utilities.saveInt("seconds", (60 - currentComponents.second!))
+            Utilities.saveInt("seconds", (59 - currentComponents.second!))
             
             // Refresh labels
             refreshLabels()
