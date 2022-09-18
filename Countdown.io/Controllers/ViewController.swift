@@ -9,7 +9,6 @@ import UIKit
 import AudioToolbox
 
 class ViewController: UIViewController {
-
     
     @IBOutlet weak var yearLabel: UILabel!
     @IBOutlet weak var dayLabel: UILabel!
@@ -23,6 +22,12 @@ class ViewController: UIViewController {
     @IBOutlet weak var MIN: UILabel!
     @IBOutlet weak var SEC: UILabel!
     
+    var years = 0
+    var days = 0
+    var hours = 0
+    var minutes = 0
+    var seconds = 0
+    
     var timer = Timer()
     
     // MARK: View load
@@ -32,188 +37,116 @@ class ViewController: UIViewController {
         
         // Setup display & datas
         overrideUserInterfaceStyle = .dark
-        setupDatas()
         
         // Timer
         scheduledTimerWithTimeInterval()
     }
     
-    // MARK: Setup datas
-    func setupDatas() {
-        let isSettedUp = Utilities.getBool("settedup")
-        if (!isSettedUp) {
-            // Saving random numbers
-            Utilities.saveInt("years", 0)
-            Utilities.saveInt("days", 0)
-            Utilities.saveInt("hours", 0)
-            Utilities.saveInt("minutes", 0)
-            Utilities.saveInt("seconds", 0)
-            
-            Utilities.saveBool("settedup", true)
-            
-            // Refresh labels
-            refreshLabels()
-            
-        }
-    }
-    
     // MARK: Refreshing labels
     func refreshLabels() {
-        if (Utilities.getInt("years") >= 10) {
-            self.yearLabel.text! = "\(Utilities.getInt("years"))"
-            if (self.yearLabel.textColor != UIColor.white) {
-                self.yearLabel.textColor = UIColor.white
-                self.YRS.textColor = UIColor.white
+        if years >= 10 {
+            self.yearLabel.text = "\(years)"
+            if self.yearLabel.textColor != .white {
+                self.yearLabel.textColor = .white
+                self.YRS.textColor = .white
             }
         } else {
-            self.yearLabel.text! = "0\(Utilities.getInt("years"))"
-            if (Utilities.getInt("years") == 0) {
-                self.yearLabel.textColor = UIColor.red
-                self.YRS.textColor = UIColor.red
+            self.yearLabel.text = "0\(years)"
+            if years == 0 {
+                self.yearLabel.textColor = .red
+                self.YRS.textColor = .red
             } else {
-                self.yearLabel.textColor = UIColor.white
-                self.YRS.textColor = UIColor.white
+                self.yearLabel.textColor = .white
+                self.YRS.textColor = .white
             }
         }
         
-        if (Utilities.getInt("days") >= 10) {
-            self.dayLabel.text! = "\(Utilities.getInt("days"))"
-            if (self.dayLabel.textColor != UIColor.white) {
-                self.dayLabel.textColor = UIColor.white
-                self.DAY.textColor = UIColor.white
+        if days >= 10 {
+            self.dayLabel.text = "\(days)"
+            if self.dayLabel.textColor != .white {
+                self.dayLabel.textColor = .white
+                self.DAY.textColor = .white
             }
         } else {
-            self.dayLabel.text! = "0\(Utilities.getInt("days"))"
-            if ((Utilities.getInt("years") == 0) && (Utilities.getInt("days") == 0)) {
-                self.dayLabel.textColor = UIColor.red
-                self.DAY.textColor = UIColor.red
+            self.dayLabel.text = "0\(days)"
+            if years == 0 && days == 0 {
+                self.dayLabel.textColor = .red
+                self.DAY.textColor = .red
             } else {
-                self.dayLabel.textColor = UIColor.white
-                self.DAY.textColor = UIColor.white
+                self.dayLabel.textColor = .white
+                self.DAY.textColor = .white
             }
         }
         
-        if (Utilities.getInt("hours") >= 10) {
-            self.hourLabel.text! = "\(Utilities.getInt("hours"))"
-            if (self.hourLabel.textColor != UIColor.white) {
-                self.hourLabel.textColor = UIColor.white
-                self.HRS.textColor = UIColor.white
+        if hours >= 10 {
+            self.hourLabel.text = "\(hours)"
+            if self.hourLabel.textColor != .white {
+                self.hourLabel.textColor = .white
+                self.HRS.textColor = .white
             }
         } else {
-            self.hourLabel.text! = "0\(Utilities.getInt("hours"))"
-            if ((Utilities.getInt("years") == 0) && (Utilities.getInt("days") == 0) && (Utilities.getInt("hours") == 0)) {
-                self.hourLabel.textColor = UIColor.red
-                self.HRS.textColor = UIColor.red
+            self.hourLabel.text = "0\(hours)"
+            if years == 0 && days == 0 && hours == 0 {
+                self.hourLabel.textColor = .red
+                self.HRS.textColor = .red
             } else {
-                self.hourLabel.textColor = UIColor.white
-                self.HRS.textColor = UIColor.white
+                self.hourLabel.textColor = .white
+                self.HRS.textColor = .white
             }
         }
         
-        if (Utilities.getInt("minutes") >= 10) {
-            self.minuteLabel.text! = "\(Utilities.getInt("minutes"))"
-            if (self.minuteLabel.textColor != UIColor.white) {
-                self.minuteLabel.textColor = UIColor.white
-                self.MIN.textColor = UIColor.white
+        if minutes >= 10 {
+            self.minuteLabel.text = "\(minutes)"
+            if (self.minuteLabel.textColor != .white) {
+                self.minuteLabel.textColor = .white
+                self.MIN.textColor = .white
             }
         } else {
-            self.minuteLabel.text! = "0\(Utilities.getInt("minutes"))"
-            if ((Utilities.getInt("years") == 0) && (Utilities.getInt("days") == 0) && (Utilities.getInt("hours") == 0) && (Utilities.getInt("minutes") == 0)) {
-                self.minuteLabel.textColor = UIColor.red
-                self.MIN.textColor = UIColor.red
+            self.minuteLabel.text = "0\(minutes)"
+            if years == 0 && days == 0 && hours == 0 && minutes == 0 {
+                self.minuteLabel.textColor = .red
+                self.MIN.textColor = .red
             } else {
-                self.minuteLabel.textColor = UIColor.white
-                self.MIN.textColor = UIColor.white
+                self.minuteLabel.textColor = .white
+                self.MIN.textColor = .white
             }
         }
         
-        if (Utilities.getInt("seconds") >= 10) {
-            self.secondLabel.text! = "\(Utilities.getInt("seconds"))"
-            if (secondLabel.textColor != UIColor.white) {
-                self.secondLabel.textColor = UIColor.white
-                self.SEC.textColor = UIColor.white
+        if seconds >= 10 {
+            self.secondLabel.text = "\(seconds)"
+            if (secondLabel.textColor != .white) {
+                self.secondLabel.textColor = .white
+                self.SEC.textColor = .white
             }
         } else {
-            self.secondLabel.text! = "0\(Utilities.getInt("seconds"))"
-            if ((Utilities.getInt("years") == 0) && (Utilities.getInt("days") == 0) && (Utilities.getInt("hours") == 0) && (Utilities.getInt("minutes") == 0) &&
-                    (Utilities.getInt("seconds") == 0)) {
-                self.secondLabel.textColor = UIColor.red
-                self.SEC.textColor = UIColor.red
+            self.secondLabel.text = "0\(seconds)"
+            if years == 0 && days == 0 && hours == 0 && minutes == 0 && seconds == 0 {
+                self.secondLabel.textColor = .red
+                self.SEC.textColor = .red
             } else {
-                self.secondLabel.textColor = UIColor.white
-                self.SEC.textColor = UIColor.white
+                self.secondLabel.textColor = .white
+                self.SEC.textColor = .white
             }
         }
     }
     
     // MARK: Setup timer
     func scheduledTimerWithTimeInterval() {
-        // Scheduling timer to call the function "updateCounting" with the interval of 1 second
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateCounting), userInfo: nil, repeats: true)
     }
     
     @objc func updateCounting() {
-        if ((Utilities.getInt("years") == 0) && (Utilities.getInt("days") == 0) && (Utilities.getInt("hours") == 0) && (Utilities.getInt("minutes") == 0) &&
-                (Utilities.getInt("seconds") == 0)) {
-            AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
-        } else {
-            // Get back the date
-            let currentDate = Date()
-            let selectorDate = Utilities.getDate("dateSelected")
-            
-            let calendar = Calendar.current
-                
-            let currentComponents = calendar.dateComponents([Calendar.Component.second, Calendar.Component.minute, Calendar.Component.hour, Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: currentDate)
-                
-            let objectiveComponents = calendar.dateComponents([Calendar.Component.second, Calendar.Component.minute, Calendar.Component.hour, Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: selectorDate)
-                
-            // Day difference
-            // Replace the hour (time) of both dates with 00:00
-            let date1 = calendar.startOfDay(for: currentDate)
-            let date2 = calendar.startOfDay(for: selectorDate)
-
-            let components = calendar.dateComponents([.day], from: date1, to: date2)
-            
-            Utilities.saveInt("days", components.day!)
-            
-            // Year difference
-            if (components.day! > 366 && Utilities.isLeapYear(objectiveComponents.year!)) {
-                Utilities.saveInt("years", Int(floor(Double(components.day! / 366))))
-            } else if (components.day! > 365) {
-                Utilities.saveInt("years", Int(floor(Double(components.day! / 365))))
-            } else {
-                Utilities.saveInt("years", 0)
-            }
-                
-            // Hour difference
-            if (objectiveComponents.hour! < currentComponents.hour!) {
-                Utilities.saveInt("hours", (24 - currentComponents.hour!))
-            } else if (objectiveComponents.hour! - currentComponents.hour! == 1) {
-                Utilities.saveInt("hours", 0)
-            } else {
-                Utilities.saveInt("hours", (objectiveComponents.hour! - currentComponents.hour!))
-            }
-                
-            // Minute difference
-            if (objectiveComponents.minute! < currentComponents.minute!) {
-                Utilities.saveInt("minutes", (60 - currentComponents.minute!))
-            } else if (objectiveComponents.minute! - currentComponents.minute! == 1) {
-                Utilities.saveInt("minutes", 0)
-            } else {
-                Utilities.saveInt("minutes", (objectiveComponents.minute! - currentComponents.minute!))
-            }
-            
-            // Set seconds
-            Utilities.saveInt("seconds", (59 - currentComponents.second!))
-            
-            // Refresh labels
-            refreshLabels()
-        }
-    }
-    
-    func alertUser(_ title: String, _ message:String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
-        present(alert, animated: true)
+        // Get back the date
+        let selectedDate = UIDatePicker().getFromUserDefaults(getKey: "selectedDate")
+        
+        let components = Calendar.current.dateComponents([.second, .minute, .hour, .day, .year], from: Date(), to: selectedDate)
+        
+        years = components.year ?? 0
+        days = components.day ?? 0
+        hours = components.hour ?? 0
+        minutes = components.minute ?? 0
+        seconds = components.second ?? 0
+        
+        years != 0 || days != 0 || hours != 0 || minutes != 0 || seconds != 0 ? refreshLabels() : AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
     }
 }

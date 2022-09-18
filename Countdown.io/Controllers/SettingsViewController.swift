@@ -23,67 +23,21 @@ class SettingsViewController: UIViewController {
     }
 
     func setupElements() {
-        Utilities.styleFilledButton(confirmButton, "red", 18.0)
+        confirmButton.styleFilled(color: .red, radius: 18.0)
     }
 
     @IBAction func confirmAction(_ sender: Any) {
-        let currentDate = Date()
-        if (self.dateSelector.date <= currentDate) {
-            alertUser("Error", "The date you entered must be past the current date")
+        if (self.dateSelector.date <= Date()) {
+            let alert = UIAlertController(title: "Error", message: "The selected date must be past the current date", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+            present(alert, animated: true)
         } else {
             
             // Save the date
-            Utilities.saveDate("dateSelected", self.dateSelector.date)
-            
-            let calendar = Calendar.current
-            
-            let currentComponents = calendar.dateComponents([Calendar.Component.second, Calendar.Component.minute, Calendar.Component.hour, Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: currentDate)
-            
-            let objectiveComponents = calendar.dateComponents([Calendar.Component.second, Calendar.Component.minute, Calendar.Component.hour, Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: self.dateSelector.date)
-            
-            // Day difference
-            // Replace the hour (time) of both dates with 00:00
-            let date1 = calendar.startOfDay(for: currentDate)
-            let date2 = calendar.startOfDay(for: self.dateSelector.date)
-
-            let components = calendar.dateComponents([.day], from: date1, to: date2)
-            
-            Utilities.saveInt("days", components.day!)
-            
-            // Year difference
-            if (components.day! > 366 && Utilities.isLeapYear(objectiveComponents.year!)) {
-                Utilities.saveInt("years", Int(floor(Double(components.day! / 366))))
-            } else if (components.day! > 365) {
-                Utilities.saveInt("years", Int(floor(Double(components.day! / 365))))
-            } else {
-                Utilities.saveInt("years", 0)
-            }
-            
-            // Hour difference
-            if (objectiveComponents.hour! < currentComponents.hour!) {
-                Utilities.saveInt("hours", (24 - currentComponents.hour!))
-            } else {
-                Utilities.saveInt("hours", (objectiveComponents.hour! - currentComponents.hour!))
-            }
-            
-            // Minute difference
-            if (objectiveComponents.minute! < currentComponents.minute!) {
-                Utilities.saveInt("minutes", (60 - currentComponents.minute!))
-            } else {
-                Utilities.saveInt("minutes", (objectiveComponents.minute! - currentComponents.minute!))
-            }
-            
-            // Setup seconds
-            Utilities.saveInt("seconds", (60 - currentComponents.second!))
+            self.dateSelector.saveUserDefaults(saveKey: "selectedDate")
             
             // Dismiss
-            self.dismiss(animated: true, completion: nil)
+            self.dismiss(animated: true)
         }
-    }
-    
-    func alertUser(_ title: String, _ message:String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
-        present(alert, animated: true)
     }
 }
