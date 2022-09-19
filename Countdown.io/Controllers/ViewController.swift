@@ -139,7 +139,7 @@ class ViewController: UIViewController {
         // Get back the date
         let selectedDate = Utilities.getDate(dateKey: "selectedDate")
         
-        let components = Calendar.current.dateComponents([.second, .minute, .hour, .day, .year], from: Date(), to: selectedDate)
+        let components = Calendar.current.dateComponents([.year, .day, .hour, .minute, .second], from: Date(), to: selectedDate)
         
         years = components.year ?? 0
         days = components.day ?? 0

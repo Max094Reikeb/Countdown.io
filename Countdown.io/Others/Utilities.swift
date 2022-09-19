@@ -45,7 +45,7 @@ class Utilities {
     
     // function to save a date with a key
     static func saveDate(dateKey: String, date: Date) {
-        let components = Calendar.current.dateComponents([.second, .minute, .hour, .day, .year], from: date)
+        let components = Calendar.current.dateComponents([.year, .day, .hour, .minute, .second], from: date)
         Utilities.saveInt("yearUID", components.year!)
         Utilities.saveInt("dayUID", components.day!)
         Utilities.saveInt("hourUID", components.hour!)
