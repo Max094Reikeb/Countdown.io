@@ -28,32 +28,6 @@ extension UIButton {
 
 }
 
-extension UIDatePicker {
-    
-    /// Save date into UserDefaults
-    func saveUserDefaults(saveKey: String) {
-        let components = Calendar.current.dateComponents([.second, .minute, .hour, .day, .year], from: self.date)
-        Utilities.saveInt("yearUID", components.year!)
-        Utilities.saveInt("dayUID", components.day!)
-        Utilities.saveInt("hourUID", components.hour!)
-        Utilities.saveInt("minUID", components.minute!)
-        Utilities.saveInt("secUID", components.second!)
-    }
-    
-    /// Get date from UserDefaults
-    func getFromUserDefaults(getKey: String) -> Date {
-        var components = DateComponents()
-        
-        components.year = Utilities.getInt("yearUID")
-        components.day = Utilities.getInt("dayUID")
-        components.hour = Utilities.getInt("hourUID")
-        components.minute = Utilities.getInt("minUID")
-        components.second = Utilities.getInt("secUID")
-        
-        return Calendar.current.date(from: components)!
-    }
-}
-
 class Utilities {
 
     // function to save an int with a key
@@ -67,5 +41,28 @@ class Utilities {
         let defaults = UserDefaults.standard
         let returnInt = defaults.integer(forKey: intKey)
         return returnInt
+    }
+    
+    // function to save a date with a key
+    static func saveDate(dateKey: String, date: Date) {
+        let components = Calendar.current.dateComponents([.second, .minute, .hour, .day, .year], from: date)
+        Utilities.saveInt("yearUID", components.year!)
+        Utilities.saveInt("dayUID", components.day!)
+        Utilities.saveInt("hourUID", components.hour!)
+        Utilities.saveInt("minUID", components.minute!)
+        Utilities.saveInt("secUID", components.second!)
+    }
+    
+    // function to get a date with a key
+    static func getDate(dateKey: String) -> Date {
+        var components = DateComponents()
+        
+        components.year = Utilities.getInt("yearUID")
+        components.day = Utilities.getInt("dayUID")
+        components.hour = Utilities.getInt("hourUID")
+        components.minute = Utilities.getInt("minUID")
+        components.second = Utilities.getInt("secUID")
+        
+        return Calendar.current.date(from: components)!
     }
 }

@@ -250,18 +250,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="755"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="mi8-zG-Kgu">
-                                <rect key="frame" x="66" y="360.33333333333331" width="243" height="34.333333333333314"/>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="inline" translatesAutoresizingMaskIntoConstraints="NO" id="mi8-zG-Kgu">
+                                <rect key="frame" x="66" y="218.33333333333334" width="243" height="318.33333333333326"/>
                                 <color key="tintColor" systemColor="tintColor"/>
                             </datePicker>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select the countdown date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YSC-kE-fnG">
-                                <rect key="frame" x="49.666666666666657" y="241.33333333333334" width="276" height="29.000000000000028"/>
+                                <rect key="frame" x="49.666666666666657" y="99.333333333333343" width="276" height="28.999999999999986"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1QU-no-vWX">
-                                <rect key="frame" x="66" y="484.66666666666669" width="243" height="50.000000000000057"/>
+                                <rect key="frame" x="66" y="626.66666666666663" width="243" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="2lR-nn-9yS"/>
                                 </constraints>

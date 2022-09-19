@@ -35,7 +35,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        // Setup display & datas
+        // Setup display
         overrideUserInterfaceStyle = .dark
         
         // Timer
@@ -137,7 +137,7 @@ class ViewController: UIViewController {
     
     @objc func updateCounting() {
         // Get back the date
-        let selectedDate = UIDatePicker().getFromUserDefaults(getKey: "selectedDate")
+        let selectedDate = Utilities.getDate(dateKey: "selectedDate")
         
         let components = Calendar.current.dateComponents([.second, .minute, .hour, .day, .year], from: Date(), to: selectedDate)
         

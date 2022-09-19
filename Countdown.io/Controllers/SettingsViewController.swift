@@ -34,7 +34,7 @@ class SettingsViewController: UIViewController {
         } else {
             
             // Save the date
-            self.dateSelector.saveUserDefaults(saveKey: "selectedDate")
+            Utilities.saveDate(dateKey: "selectedDate", date: self.dateSelector.date)
             
             // Dismiss
             self.dismiss(animated: true)
